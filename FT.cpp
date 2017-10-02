@@ -1,9 +1,11 @@
 #include <string>
 #include <iostream>
-#include <glob.h>
+#include <glob.h> //for folder traspasssing
 #include <vector>
+#include <sys/stat.h>  //for files manipulation
 using std::vector;
 
+std::string currentFolder;
 
 
 vector<std::string> globVector(const std::string& pattern){
@@ -17,11 +19,34 @@ vector<std::string> globVector(const std::string& pattern){
     return files;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+	currentFolder = "";
+
+	//TODO instert desired folder, drag&drop to GUI
  	vector<std::string> files = globVector("./*");
+
+
  	for (std::vector<std::string>::iterator i = files.begin(); i != files.end(); ++i)
  	{
- 		printf("%s\n", i);	
+ 		std::cout << *i << std::endl;
+ 		//TODO distinguish raw photo formats
+ 		if(true){
+ 			//TODO distinguish photos containing QR codes
+ 			if(true){
+ 				//TODO create new directory
+ 				if (mkdir("/Users/paloulbrich/Desktop/Matej/FolderThem/tmp", 0777))
+                           perror("/Users/paloulbrich/Desktop/Matej/FolderThem/tmp");
+ 			} else {
+
+ 				//There was already found a QR code
+ 				if(currentFolder!=""){
+ 					//TODO move file into current folder
+ 				}
+ 			}
+
+ 		}
+
+ 		
  	}
 }
